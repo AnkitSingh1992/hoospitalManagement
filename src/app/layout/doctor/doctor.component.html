@@ -1,0 +1,177 @@
+<!--  listing of the Doctor -->
+<div fxFlex *ngIf="doctorListing">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Doctors
+                <button style="text-align:right" (click)=" onActiveCreateDoctor()" mat-raised-button color="primary">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="weight">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+                        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="symbol">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+                        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="ml-5" (click)="onView()" mat-mini-fab color="primary">
+                                    <mat-icon>remove_red_eye</mat-icon>
+                            </button>
+                            <button class="ml-5" (click)="onEdit()" mat-mini-fab color="primary">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button class="ml-5" mat-mini-fab color="primary">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+
+
+<div *ngIf="createDoctor" fxFlex>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <div *ngIf="editDoctor" class="text-center">
+                    Edit Doctor
+                </div>
+                <div *ngIf="!editDoctor" class="text-center">
+                    Create Doctor
+                </div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- <h1 class="app-name">Sb Admin Material</h1> -->
+            <form [formGroup]="userForm" (ngSubmit)="onSave()" class="login-form" fxFlex>
+                <div fxFlex fxlayout="row" fxlayout.lt-md="column">
+                    <div fxFlexFill>
+                        <mat-form-field class="w-100">
+                            <input matInput placeholder="Firstname" formControlName="first_name">
+                            <mat-error>
+                                <span *ngIf="userForm.controls['first_name'].hasError('required')">Firstname is
+                                    <strong>required &nbsp;</strong>
+                                </span>
+                            </mat-error>
+
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div fxFlex fxlayout="row" fxlayout.lt-md="column">
+                    <div fxFlexFill>
+                        <mat-form-field class="w-100">
+                            <input matInput placeholder="Lastname" formControlName="last_name">
+                            <mat-error>
+                                <span *ngIf="userForm.controls['last_name'].hasError('required')">Lastname is
+                                    <strong>required &nbsp;</strong>
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+
+                <div fxFlex fxlayout="row" fxlayout.lt-md="column">
+                    <div fxFlexFill>
+                        <mat-form-field class="w-100">
+                            <input matInput placeholder="Email" formControlName="email">
+                            <mat-error>
+                                <span *ngIf="userForm.controls['email'].hasError('isEmailUnique')">Email is
+                                    <strong>already exists. &nbsp;</strong>
+                                </span>
+                                <span *ngIf="userForm.controls['email'].hasError('required')">Email is
+                                    <strong>required &nbsp;</strong>
+                                </span>
+
+                            </mat-error>
+
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div *ngIf="!editUser" fxFlex fxLayout="row" fxLayout.lt-md="column">
+                    <div fxFlexFill>
+                        <mat-form-field class="w-100">
+                            <input matInput type="password" placeholder="Password" formControlName="password">
+                            <mat-error>
+                                <span *ngIf="userForm.controls['password'].hasError('required')">Password is
+                                    <strong>required &nbsp;</strong>
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                    <div fxFlexFill>
+                        <mat-form-field class="w-100">
+                            <mat-label>Select role ...</mat-label>
+                            <mat-select formControlName="role_id">
+                                <mat-option *ngFor="let role of roleList" [value]="role.role_id">
+                                    {{role.role_name}}
+                                </mat-option>
+                            </mat-select>
+
+                            <mat-error>
+                                <span *ngIf="userForm.controls['role_id'].hasError('required')">Role is
+                                    <strong>required &nbsp;</strong>
+                                </span>
+
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+
+                <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                    <div fxFlexFill>
+
+                        <button *ngIf="!editUser" [disabled]="!userForm.valid" type="submit" mat-raised-button color="primary" class="w-100 mr-10">Save</button>
+                        <button *ngIf="editUser" [disabled]="!userForm.valid" type="submit" mat-raised-button color="primary" class="w-100 mr-10">Update</button>
+
+                        <button mat-raised-button color="primary" class="w-100" (click)="onActivateDoctorListing()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,70 @@
+<div class="logo">
+    <img src="../../assets/images/logo.png" />
+</div>
+<div class="login-page">
+    <div class="content">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="login" class="login-form" fxFlex>
+            <div class="text-center">
+                <h2 class="app-name">Admin Login</h2>
+            </div>
+            <div fxFlex fxlayout="row" fxlayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Email" formControlName="email">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput type="password" placeholder="Password" formControlName="password">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column" style="margin: 20px 0 30px 0">
+                <!-- <div fxFlex>
+                        <mat-checkbox color="primary">Remember Me</mat-checkbox>
+                    </div> -->
+                <div fxFlex fxLayoutAlign="end">
+                    <a (click)="onForgotPassword()">Forgot Password</a>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <button mat-raised-button color="primary" class="w-100" type="submit">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="content">
+        <form [formGroup]="forgetForm" (ngSubmit)="onForgot()" *ngIf="forgotPassword" class="login-form" fxFlex>
+            <div class="text-center">
+                <h2 class="app-name">Forgot Password</h2>
+            </div>
+            <div fxFlex fxlayout="row" fxlayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Email" formControlName="email">
+                        <mat-error>
+                            <span *ngIf="forgetForm.controls['email'].hasError('required')">Email is
+                                <strong>required &nbsp;</strong>
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column" style="margin: 20px 0 30px 0">
+
+                <div fxFlex fxLayoutAlign="end">
+                    <a (click)="onSignIn()">Sign In</a>
+                </div>
+            </div>
+            <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <button mat-raised-button color="primary" class="w-100">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

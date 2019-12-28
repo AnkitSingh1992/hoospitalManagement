@@ -1,0 +1,44 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Fontil Sans';
+}
+
+.main-container {
+    position: absolute;
+    top: 64px;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+}
+th,td{text-align:left !important}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.bggreen{background-color: green;color:white}
+.bgred{background-color: red;color:white}
+.bggrey{background-color: grey;color:white}
+.mat-header-cell{
+    font-size: 16px;
+    font-weight: bold;
+}
+.overflow-scroll{
+    width:300px;
+    overflow-x: auto;
+    white-space:nowrap;
+    
+}
+
+.not-wrap {white-space:nowrap;}
+.of-scroll{overflow: auto;}
+.mat-card-header-text{margin:0px !important}
+.mr-5{margin-right:5px !important}
+.ml-5{margin-left:5px !important}
+.mb-5{margin-bottom:25px !important}
+.text-left{text-align:left !important}
+.pos-fix{position: fixed !important}
+a{cursor: pointer}
