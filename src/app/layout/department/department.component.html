@@ -1,0 +1,120 @@
+<!--  listing of Department -->
+<div fxFlex *ngIf="departmentListing">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Department
+                <button style="text-align:right" (click)="createDepartment()" mat-raised-button color="primary">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                    <ng-container matColumnDef="departmentName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> DepartmentName </th>
+                        <td mat-cell *matCellDef="let element"> {{element.departmentName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="ml-5" (click)="onView(element.departmentId)" mat-mini-fab color="accent">
+                                <mat-icon>remove_red_eye</mat-icon>
+                            </button>
+                            <button class="ml-5" (click)="onEdit(element.departmentId)" mat-mini-fab color="primary">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <mat-slide-toggle class="ml-5" (change)="onStatusChange($event,element.departmentId)" 
+                            [color]="color" [checked]="element.status == 1?'true':'false'" [disabled]="'false'">
+
+                        </mat-slide-toggle>
+                         
+                            <button class="ml-5" mat-mini-fab (click)="delete(element.departmentId)" color="warn">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20,50]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<!-- view department  -->
+<div fxflex *ngIf="viewDepartment">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>View Department</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table>
+                <tr>
+                    <td class="view-desig-td">Designation Name</td>
+                    <td class="view-desig-td">{{department.departmentName}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td">Status</td>
+                    <span *ngIf="department.status == 1">
+                        <td class="view-desig-td">Active</td>
+                    </span>
+                    <span *ngIf="department.status == 0">
+                        <td class="view-desig-td">Deactive</td>
+                    </span>
+                </tr>
+                <tr>
+                    <button mat-raised-button (click)="oncancel()" color="warn" class="w-100">Cancel</button>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+<!-- create designation-->
+
+<div *ngIf="addDepartment" fxFlex>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <div *ngIf="editDepartment" class="text-center">
+                    Edit Department
+                </div>
+                <div *ngIf="!editDepartment" class="text-center">
+                    Create Department
+                </div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>        
+            <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()" class="login-form" fxFlex>
+                <div fxFlex fxlayout="row" fxlayout.lt-md="column">
+                    <div fxFlexFill>
+                        <mat-form-field class="w-100">
+                            <input matInput placeholder="Department Name" formControlName="departmentName">
+                            <mat-error>
+                                <span *ngIf="departmentForm.controls['departmentName'].hasError('required')">Department Name is
+                                    <strong>required &nbsp;</strong>
+                                </span>
+                            </mat-error>
+
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxFlex fxLayout="row" fxLayout.lt-md="column">
+                    <div fxFlexFill>
+                        <button *ngIf="!editDepartment" [disabled]="!departmentForm.valid" type="submit" mat-raised-button color="primary" class="w-100 mr-10">Save</button>
+                        <button *ngIf="editDepartment" [disabled]="!departmentForm.valid" type="submit" mat-raised-button color="primary" class="w-100 mr-10">Update</button>
+                        <button mat-raised-button color="primary" class="w-100" (click)="oncancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

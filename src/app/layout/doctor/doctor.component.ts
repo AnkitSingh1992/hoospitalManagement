@@ -20,8 +20,8 @@ export class DoctorComponent implements OnInit {
  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','action'];
  dataSource: MatTableDataSource<any>;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
   constructor(private changeDetectorRefs: ChangeDetectorRef, private toastr: ToastrService, private router: Router, private formBuilder: FormBuilder) {
     this.userForm = this.formBuilder.group({
       first_name: ['', [Validators.required]],
