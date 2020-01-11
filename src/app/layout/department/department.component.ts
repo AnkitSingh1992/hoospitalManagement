@@ -3,6 +3,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { DepartmentService } from '../../shared/services/department.service';
+
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -19,14 +20,19 @@ export class DepartmentComponent implements OnInit {
   department: any;
   departmentForm: FormGroup;
   displayedColumns: string[] = ['departmentName', 'action'];
+
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  constructor(private changeDetectorRefs: ChangeDetectorRef, private toastr: ToastrService, private router: Router, private formBuilder: FormBuilder, public departmentService: DepartmentService) {
+  constructor(private changeDetectorRefs: ChangeDetectorRef, private toastr: ToastrService,
+    private router: Router, private formBuilder: FormBuilder,
+    public departmentService: DepartmentService,   ) {
     this.departmentForm = this.formBuilder.group({
-      departmentId: [''],
+      departmentId: [''],   
       departmentName: ['', Validators.required]
     });
+
+
   }
 
   ngOnInit() {
@@ -35,8 +41,6 @@ export class DepartmentComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-
   loadDepartmentList() {
     this.departmentService.departmentList().subscribe((response: any) => {
       this.departmentList = response.data;
@@ -44,7 +48,6 @@ export class DepartmentComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, err => { console.log(err) });
-
   }
 
   onView(id) {
@@ -53,7 +56,6 @@ export class DepartmentComponent implements OnInit {
       this.departmentListing = false;
       this.viewDepartment = true;
     }, err => { console.log(err) });
-
   }
 
   oncancel() {
@@ -62,8 +64,8 @@ export class DepartmentComponent implements OnInit {
     this.addDepartment = false;
     this.editDepartment = false;
     this.loadDepartmentList();
+    this.departmentForm.reset();
   }
-
   onStatusChange(event, departmentId) {
     var status = 0
     if (event.checked) {
@@ -120,7 +122,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   saveDepartment() {
-    if (this.departmentForm.value.departmentId == '') {
+    if (this.departmentForm.value.departmentId == '' || this.departmentForm.value.departmentId == null) {
       this.departmentService.saveDepartment(this.departmentForm.value).subscribe(
         res => {
           if (res.code == 200) {
@@ -139,7 +141,6 @@ export class DepartmentComponent implements OnInit {
         res => {
           if (res.code == 200) {
             this.toastr.success('', res.data);
-
           } else {
             this.toastr.warning('', res.message)
           }
@@ -150,6 +151,7 @@ export class DepartmentComponent implements OnInit {
         err => { console.log(err) }
       );
     }
+
   }
 
 

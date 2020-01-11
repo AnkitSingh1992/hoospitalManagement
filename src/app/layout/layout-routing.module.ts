@@ -15,7 +15,7 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
-
+      
       {
         path: 'doctor',
         loadChildren: './doctor/doctor.module#DoctorModule'
@@ -24,6 +24,10 @@ const routes: Routes = [
       {
         path: 'department',
         loadChildren: './department/department.module#DepartmentModule'
+      },
+      {
+        path: 'designation',
+        loadChildren: './designation/designation.module#DesignationModule'
       },
 
     ]
