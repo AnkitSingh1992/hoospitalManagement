@@ -133,11 +133,11 @@ getdepartmentList(){
   }
 
   save() {
-    alert(JSON.stringify(this.designationForm.value))
+    
     if (this.designationForm.value.designationId == '' || this.designationForm.value.designationId == null) {
       this.designationService.saveDesignation(this.designationForm.value).subscribe(
         res => {
-          alert(JSON.stringify(res))
+     
           if (res.code == 200) {
             this.toastr.success('', res.data);
             this.loadDesignationList();
@@ -154,7 +154,7 @@ getdepartmentList(){
       this.designationService.updateDesignation(this.designationForm.value).subscribe(
         
         res => {
-          alert(JSON.stringify(res))
+       
           if (res.code == 200) {
             this.toastr.success('', res.data);
             this.loadDesignationList();
