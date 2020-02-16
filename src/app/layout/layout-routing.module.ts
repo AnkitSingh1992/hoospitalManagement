@@ -29,6 +29,10 @@ const routes: Routes = [
         path: 'designation',
         loadChildren: './designation/designation.module#DesignationModule'
       },
+      {
+        path: 'patient',
+        loadChildren: './patient/patient.module#PatientModule'
+      },
 
     ]
   }
