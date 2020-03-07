@@ -18,6 +18,10 @@ export class DesignationService {
     return <any>this.httpClient.get(this.designation);
   }
 
+  public designationListByDepartmentId(designationId) {
+    return <any>this.httpClient.get(this.designation+"/department/"+designationId);
+  }
+
   public getDesignation(id) {
     return <any>this.httpClient.get(this.designation + "/" + id);
   }

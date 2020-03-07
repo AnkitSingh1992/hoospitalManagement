@@ -31,8 +31,6 @@ export class DepartmentComponent implements OnInit {
       departmentId: [''],   
       departmentName: ['', Validators.required]
     });
-
-
   }
 
   ngOnInit() {
@@ -151,7 +149,6 @@ export class DepartmentComponent implements OnInit {
         err => { console.log(err) }
       );
     }
-
   }
 
 

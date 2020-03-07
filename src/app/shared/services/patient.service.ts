@@ -17,8 +17,7 @@ export class PatientService {
   }
 
   public changeStatus(id, status) {
-    alert(this.patient + "/status?patientId =" + id + "&status=" + status);
-    return <any>this.httpClient.put(this.patient + "/status?patientId =" + id + "&status=" + status, {});
+    return <any>this.httpClient.put(this.patient + "/status?patientId="+id + "&status=" +status, {});
   }
 
   public delete(id) {

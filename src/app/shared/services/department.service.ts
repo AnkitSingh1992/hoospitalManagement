@@ -22,6 +22,8 @@ export class DepartmentService {
     return <any>this.httpClient.get(this.department + "/" + id);
   }
 
+  
+
   public changeStatus(id, status) {
     return <any>this.httpClient.put(this.department + "/status?departmentId=" + id + "&status=" + status, {});
   }

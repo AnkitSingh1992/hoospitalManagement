@@ -24,7 +24,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
-    TranslateModule
+    TranslateModule,
+   
 
   ]
 })

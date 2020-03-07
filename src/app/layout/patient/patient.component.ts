@@ -29,7 +29,7 @@ export class PatientComponent implements OnInit {
   }
   loadPatientList(){   
       this.patientService.patientList().subscribe((response: any) => {
-        this.patientList = response.data;
+        this.patientList = response.data;      
         this.dataSource = new MatTableDataSource(this.patientList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -59,7 +59,7 @@ export class PatientComponent implements OnInit {
     if (event.checked) {
       status = 1;
     }
-    alert(id)
+  
     this.patientService.changeStatus(id, status).subscribe((response: any) => {
       if (response.code == 200) {
         this.toastr.success(response.data);
@@ -71,14 +71,17 @@ export class PatientComponent implements OnInit {
     }, err => { console.log(err) });
   }
   delete(id) {
+    alert(id)
     this.patientService.delete(id).subscribe((response: any) => {
+      console.log(response)
       if (response.code == 200) {
+        console.log(response)
         this.toastr.success(response.data);
         this.loadPatientList();
         this
       } else if (response.code == 801) {
         this.toastr.warning(response.data)
-      } else if (response.code == 802) {
+      } else if (response.code == 803) {
         this.toastr.warning(response.data)
       }
     }, err => { console.log(err) });
