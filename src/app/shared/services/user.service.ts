@@ -10,7 +10,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   public saveUsers(temp) {
-    return <any>this.httpClient.post(this.user+"/save", temp); 
+    return <any>this.httpClient.post(this.user + "/save", temp);
   }
 
   public userList() {
@@ -21,9 +21,9 @@ export class UserService {
     return <any>this.httpClient.get(this.user + "/" + id);
   }
 
-  
+
   public changeStatus(id, status) {
-    return <any>this.httpClient.put(this.user + "/status?userId="+id + "&status=" +status, {});
+    return <any>this.httpClient.put(this.user + "/status?userId=" + id + "&status=" + status, {});
   }
 
   public delete(id) {
@@ -31,6 +31,6 @@ export class UserService {
   }
 
   public updateUser(temp) {
-    return <any>this.httpClient.put(this.user+"/update", temp); 
+    return <any>this.httpClient.put(this.user + "/update", temp);
   }
 }

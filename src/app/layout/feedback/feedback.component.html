@@ -1,0 +1,107 @@
+<!--  listing of Department -->
+<div fxFlex *ngIf="feedbackListing">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>FeedBack
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="mobile">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
+                        <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="departmentName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> DepartmentName </th>
+                        <td mat-cell *matCellDef="let element"> {{element.departmentName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="formType">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> FormType </th>
+                        <td mat-cell *matCellDef="let element"> {{element.formType}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="ml-5" (click)="onView(element.feedbackId)" mat-mini-fab color="accent">
+                                <mat-icon>remove_red_eye</mat-icon>
+                            </button>
+
+                            <mat-slide-toggle class="ml-5" (change)="onStatusChange($event,element.feedbackId)" [color]="color" [checked]="element.status == 1?'true':'false'"
+                                [disabled]="'false'">
+
+                            </mat-slide-toggle>
+
+                            <button class="ml-5" mat-mini-fab (click)="delete(element.feedbackId)" color="warn">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20,50]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<!--  view Feedback-->
+<div fxflex *ngIf="viewFeedback">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>View Feedback</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table>
+                <tr>
+                    <td class="view-desig-td"> Name</td>
+                    <td class="view-desig-td">{{feedback.name}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td"> Email</td>
+                    <td class="view-desig-td">{{feedback.email}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td"> Mobile</td>
+                    <td class="view-desig-td">{{feedback.mobile}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td"> Department</td>
+                    <td class="view-desig-td">{{feedback.departmentName}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td"> FormType</td>
+                    <td class="view-desig-td">{{feedback.formType}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td"> Query</td>
+                    <td class="view-desig-td">{{feedback.query}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td">Status</td>
+                    <span *ngIf="feedback.status == 1">
+                        <td class="view-desig-td">Active</td>
+                    </span>
+                    <span *ngIf="feedback.status == 0">
+                        <td class="view-desig-td">Deactive</td>
+                    </span>
+                </tr>
+                <tr>
+                    <button mat-raised-button (click)="oncancel()" color="warn" class="w-100">Cancel</button>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,48 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-table th,
+td {
+    text-align: center;
+}
+
+.bggreen {
+    background-color: green;
+    color: white
+}
+
+.bgred {
+    background-color: red;
+    color: white
+}
+.mr-10{margin-right:10px;}
+
+
+
+/* CSS to change Default/'Accent' color */
+
+::ng-deep .mat-slide-toggle-thumb {
+    background-color: red;
+}
+::ng-deep .mat-slide-toggle-bar {
+    background-color: #66222c;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: green; /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color:#164424;  /*replace with your color*/
+}
+
+.view-desig-td{
+    width : 50%;
+}
+

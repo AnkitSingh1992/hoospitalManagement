@@ -37,6 +37,14 @@ const routes: Routes = [
         path: 'users',
         loadChildren: './users/users.module#UsersModule'
       },
+      {
+        path: 'feedback',
+        loadChildren: './feedback/feedback.module#FeedbackModule'
+      },
+      {
+        path: 'diagnosis-type',
+        loadChildren: './diagnosistype/diagnosistype.module#DiagnosistypeModule'
+      },
 
     ]
   }

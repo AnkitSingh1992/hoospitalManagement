@@ -11,7 +11,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 
-
 @NgModule({
   declarations: [LayoutComponent, TopnavComponent, SidebarComponent],
   imports: [
@@ -25,8 +24,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatSidenavModule,
     MatToolbarModule,
     TranslateModule,
-   
-
   ]
 })
 export class LayoutModule { }
