@@ -1,0 +1,114 @@
+<!--  listing of Department -->
+<div fxFlex *ngIf="diagnsiTestListing">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>DiagnosisTest
+                <!-- <button style="text-align:right" (click)="createDepartment()" mat-raised-button color="primary">
+                    <mat-icon>add</mat-icon>
+                </button> -->
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                    <ng-container matColumnDef="serviceId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Service Type </th>
+                        <td mat-cell *matCellDef="let element"> {{element.serviceId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="patientId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.patientId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="document">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> document Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.document}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button class="ml-5" (click)="onView(element.diagnosticTestId)" mat-mini-fab color="accent">
+                                <mat-icon>remove_red_eye</mat-icon>
+                            </button>
+                            <!-- <button class="ml-5" (click)="onEdit(element.departmentId)" mat-mini-fab color="primary">
+                                <mat-icon>edit</mat-icon>
+                            </button> 
+                            <mat-slide-toggle class="ml-5" (change)="onStatusChange($event,element.diagnosticTestId)" [color]="color" [checked]="element.status == 1?'true':'false'"
+                                [disabled]="'false'">
+
+                            </mat-slide-toggle>
+
+                            <button class="ml-5" mat-mini-fab (click)="delete(element.diagnosticTestId)" color="warn">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>-->
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20,50]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<!-- view department  -->
+<div fxflex *ngIf="viewDiagnsisTest">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>View DiagnsisTest</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table>
+                <tr>
+                    <td class="view-desig-td">Service Type</td>
+                    <td class="view-desig-td">{{diagnosisTest.serviceId}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td">Doctor Name</td>
+                    <td class="view-desig-td">{{diagnosisTest.patientId}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td">date</td>
+                    <td class="view-desig-td">{{diagnosisTest.date}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td">document</td>
+                    <td class="view-desig-td">{{diagnosisTest.document}}</td>
+                </tr>
+                <tr>
+                    <td class="view-desig-td">remarks</td>
+                    <td class="view-desig-td">{{diagnosisTest.remarks}}</td>
+                </tr>
+
+                <tr>
+                    <td class="view-desig-td">visited</td>
+                    <span *ngIf="diagnosisTest.visited == 1">
+                        <td class="view-desig-td">Yes</td>
+                    </span>
+                    <span *ngIf="diagnosisTest.visited == 0">
+                        <td class="view-desig-td">No</td>
+                    </span>
+                </tr>
+                <tr>
+                    <td class="view-desig-td">Status</td>
+                    <span *ngIf="diagnosisTest.status == 1">
+                        <td class="view-desig-td">Active</td>
+                    </span>
+                    <span *ngIf="diagnosisTest.status == 0">
+                        <td class="view-desig-td">Deactive</td>
+                    </span>
+                </tr>
+                <tr>
+                    <button mat-raised-button (click)="oncancel()" color="warn" class="w-100">Cancel</button>
+                </tr>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>

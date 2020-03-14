@@ -45,7 +45,14 @@ const routes: Routes = [
         path: 'diagnosis-type',
         loadChildren: './diagnosistype/diagnosistype.module#DiagnosistypeModule'
       },
-
+      {
+        path: 'appointment',
+        loadChildren: './appointment/appointment.module#AppointmentModule'
+      },
+      {
+        path: 'diagnosis-test',
+        loadChildren: './diagnosistest/diagnosistest.module#DiagnosistestModule'
+      },
     ]
   }
 

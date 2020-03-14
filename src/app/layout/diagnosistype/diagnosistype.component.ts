@@ -85,8 +85,7 @@ export class DiagnosistypeComponent implements OnInit {
     this. diagnosistypeService.delete( diagnosticServiceTypeId).subscribe((response: any) => {
       if (response.code == 200) {
         this.toastr.success(response.data);
-        this.loadDiagnosticList();
-        
+        this.loadDiagnosticList();        
       } else {
         this.toastr.warning(response.data)
       }
