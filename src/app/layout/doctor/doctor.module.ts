@@ -8,9 +8,9 @@ import { MatCheckboxModule, MatButtonToggleModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule,MatInputModule } from '@angular/material';
 import { MatButtonModule, MatCardModule, MatIconModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
 import { DashboardModule } from '../dashboard/dashboard.module';
 @NgModule({
   declarations: [DoctorComponent],
@@ -33,7 +33,8 @@ import { DashboardModule } from '../dashboard/dashboard.module';
     MatInputModule,
     DashboardModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
 
   ]
 })

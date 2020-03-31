@@ -4,79 +4,142 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../shared/services/user.service';
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.scss']
 })
 
-
 export class DoctorComponent implements OnInit {
- ELEMENT_DATA :any;
- doctorListing: boolean = true;
- createDoctor: boolean = false;
- editDoctor: boolean = false;
- userForm: FormGroup;
- displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','action'];
- dataSource: MatTableDataSource<any>;
+  user: any;
+  address: FormGroup;
+  summaryForm: FormGroup;
+  educationForm: FormGroup;
+  recognizationForm: FormGroup;
+  membershipForm: FormGroup;
+  experienceForm: FormGroup;
+  reserchForm: FormGroup;
+  faculityForm: FormGroup;
+  followForm:FormGroup;
+  presentationForm:FormGroup;
+  registrationForm:FormGroup;
 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  constructor(private changeDetectorRefs: ChangeDetectorRef, private toastr: ToastrService, private router: Router, private formBuilder: FormBuilder) {
-    this.userForm = this.formBuilder.group({
-      first_name: ['', [Validators.required]],
-      last_name: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]],
-      user_id: [''],
-      status: [''],
-      role_id: ['', [Validators.required]]
-  });
+  editAddress: boolean = false;
+  editSummary: boolean = false;
+  editEducation: boolean = false;
+  editRecognization: boolean = false;
+  editMembership: boolean = false;
+  editExperience: boolean = false;
+  editReserch: boolean = false;
+  editFaculity: boolean = false;
+  editFollow: boolean = false;
+  editPresentation : boolean = false;
+  editRegistration : boolean = false;
+
+
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  constructor(private changeDetectorRefs: ChangeDetectorRef, private toastr: ToastrService,
+    private router: Router, private formBuilder: FormBuilder,
+    private userService: UserService) {
+    this.address = this.formBuilder.group({
+      addressId: [''],
+      permanentAddressLine1: ['', Validators.required],
+      permanentAddressLine2: ['', Validators.required],
+      permanentCity: ['', Validators.required],
+      permanentState: ['', Validators.required],
+      permanentCounty: ['', Validators.required],
+      permanentPinCode: ['', Validators.required],
+      residenceAddressLine1: ['', Validators.required],
+      residenceAddressLine2: ['', Validators.required],
+      residenceCity: ['', Validators.required],
+      residenceState: ['', Validators.required],
+      residenceCounty: ['', Validators.required],
+      residencePinCode: ['', Validators.required]
+    });
+
+    this.summaryForm = this.formBuilder.group({
+      summaryId: [''],
+      doctor_id: [''],
+      short_summary: ['', Validators.required],
+      sumarry: ['', Validators.required]
+    });
+
+    this.educationForm = this.formBuilder.group({
+      education_id: [''],
+      doctor_id: [''],
+      degreeName: ['', Validators.required],
+      specialization: ['', Validators.required],
+      college: ['', Validators.required],
+      university: ['', Validators.required],
+      cityname: ['', Validators.required],
+      statename: ['', Validators.required],
+      country: ['', Validators.required],
+      joiningDate: ['', Validators.required],
+      passoutDate: ['', Validators.required]
+    });
+
+    this.recognizationForm = this.formBuilder.group({
+      award_recogination_id: [''],
+      doctor_id: [''],
+      award_recogination: ['', Validators.required],
+    });
+
+    this.experienceForm = this.formBuilder.group({
+      experience_id: [''],
+      doctor_id: [''],
+      start_date: ['', Validators.required],
+      end_date: ['', Validators.required],
+      hospital_name: ['', Validators.required],
+      designation: ['', Validators.required],
+    });
+
+    this.membershipForm = this.formBuilder.group({
+      memebership_id: [''],
+      doctor_id: [''],
+      membership: ['', Validators.required],
+    });
+
+    this.reserchForm = this.formBuilder.group({
+      reserch_id: [''],
+      doctor_id: [''],
+      reserch: ['', Validators.required],
+    });
+
+    this.faculityForm = this.formBuilder.group({
+      faculity_id: [''],
+      doctor_id: [''],
+      faculity: ['', Validators.required],
+    });
+
+    this.followForm = this.formBuilder.group({
+      follow_id: [''],
+      doctor_id: [''],
+      follow_name: ['', Validators.required],
+    });
+
+    this.presentationForm = this.formBuilder.group({
+      presntation_id: [''],
+      doctor_id: [''],
+      presentation: ['', Validators.required],
+    });
+    this.registrationForm = this.formBuilder.group({
+      reg_id: [''],
+      doctor_id: [''],
+      reg_number: ['', Validators.required],
+    });
+
 
   }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  loadData() { 
-    this.ELEMENT_DATA= [
-      {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-      {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-      {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-      {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-      {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-      {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-      {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-      {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-      {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-      {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-      
-    ];
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-}
   ngOnInit() {
- this.doctorListing =true;
-      this.loadData();
-  
+    this.getUser(10);
   }
-  onActiveCreateDoctor() {
-    this.createDoctor = true;
-    this.doctorListing = false;
-    this.editDoctor = false;
-    this.userForm.reset();
-  }
-
-  onActivateEditUser() {
-    this.createDoctor = true;
-    this.doctorListing = false;
-    this.editDoctor = true;
-    this.userForm.controls['password'].clearValidators();
-    this.userForm.controls['password'].updateValueAndValidity();
-
-  }
-  onActivateDoctorListing() {
-    this.createDoctor = false;
-    this.doctorListing = true;
+  getUser(id) {
+    this.userService.getUser(id).subscribe((response: any) => {
+      this.user = response.data;
+      console.log(JSON.stringify(this.user))
+    }, err => { console.log(err) });
   }
 }
+

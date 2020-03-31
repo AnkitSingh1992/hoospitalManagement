@@ -10,6 +10,7 @@ table {
 .mat-table th,
 td {
     text-align: center;
+    padding: 5px
 }
 
 .bggreen {
@@ -20,6 +21,10 @@ td {
 .bgred {
     background-color: red;
     color: white
+}
+
+.head{
+    font-weight:bold;  
 }
 .mr-10{margin-right:10px;}
 
@@ -41,6 +46,5 @@ td {
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
     background-color:#164424;  /*replace with your color*/
 }
-
 
 
